@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Contacto — Transmilenium Logística y Transporte{% endblock %}
+
+{% block content %}
+<section class="contact py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center" style="color: var(--brand-red);">Contáctanos</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form id="contactForm" class="p-4 border rounded shadow-sm bg-white">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre completo</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Teléfono</label>
+            <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9+\s-]+" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Mensaje</label>
+            <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary px-4">Enviar Mensaje</button>
+          </div>
+
+          <div id="formAlert" class="alert mt-3 d-none" role="alert"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ================= CONTACT FORM SCRIPT =================
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const alertBox = document.getElementById("formAlert");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Basic client-side validation
+    const formData = new FormData(form);
+    const entries = Object.fromEntries(formData.entries());
+    if (!entries.name || !entries.email || !entries.phone || !entries.message) {
+      showAlert("Por favor, completa todos los campos.", "danger");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.status === "ok") {
+        showAlert("Mensaje enviado correctamente. ¡Gracias por contactarnos!", "success");
+        form.reset();
+      } else {
+        showAlert("Ocurrió un error al enviar el mensaje.", "danger");
+      }
+    } catch (err) {
+      showAlert("Error de conexión. Inténtalo nuevamente.", "danger");
+    }
+  });
+
+  function showAlert(message, type) {
+    alertBox.textContent = message;
+    alertBox.className = `alert alert-${type} mt-3`;
+  }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{# ==========================================================
+   Transmilenium Logística y Transporte — Component Macros
+   ========================================================== #}
+
+{% macro service_card(title, icon, text) %}
+<div class="col-md-4 mb-4">
+  <div class="card border-0 shadow-sm h-100 text-center">
+    <div class="card-body">
+      <div class="display-5 mb-3 text-danger">
+        <i class="bi {{ icon }}"></i>
+      </div>
+      <h5 class="card-title fw-bold">{{ title }}</h5>
+      <p class="card-text">{{ text }}</p>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+
+{% macro fleet_item(img_src, name, capacity) %}
+<div class="col-6 col-md-4 col-lg-3 text-center">
+  <a href="{{ img_src }}" target="_blank" class="d-block mb-2">
+    <img src="{{ img_src }}" class="img-fluid rounded shadow-sm" alt="{{ name }}">
+  </a>
+  <p class="fw-semibold mb-0">{{ name }}</p>
+  <small class="text-muted">{{ capacity }}</small>
+</div>
+{% endmacro %}
+
+
+{% macro footer_contact(address, phone, email) %}
+<div class="footer-contact text-center">
+  <p class="mb-1"><strong>Dirección:</strong> {{ address }}</p>
+  <p class="mb-1"><strong>Teléfono:</strong> {{ phone }}</p>
+  <p class="mb-0"><strong>Email:</strong> <a href="mailto:{{ email }}">{{ email }}</a></p>
+</div>
+{% endmacro %}

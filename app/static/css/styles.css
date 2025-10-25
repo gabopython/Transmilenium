@@ -1,0 +1,129 @@
+/* ==========================================================
+   Transmilenium Logística y Transporte — Custom Styles
+   ========================================================== */
+
+/* ---------- Root Variables ---------- */
+:root {
+  --brand-red: #CC0000;
+  --brand-gold: #FFCC00;
+  --black: #000000;
+  --white: #FFFFFF;
+}
+
+/* ---------- Navbar Customization ---------- */
+.navbar {
+  background-color: var(--white);
+  border-bottom: 2px solid var(--brand-red);
+}
+
+.navbar-brand {
+  color: var(--brand-red) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  color: var(--black) !important;
+  font-weight: 500;
+  margin-left: 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--brand-red) !important;
+  border-bottom: 2px solid var(--brand-red);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background-color: var(--brand-red);
+  border: none;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: var(--white);
+  color: var(--brand-red);
+  border: 2px solid var(--brand-gold);
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  position: relative;
+  color: var(--white);
+  text-align: center;
+  padding: 6rem 1rem;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  border-top: 4px solid var(--brand-gold);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+footer a:hover {
+  color: var(--brand-gold);
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .navbar-nav {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+ 
