@@ -4,12 +4,21 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import api
+import os
 
-app = FastAPI()
+ENV = os.environ.get("ENV", "development")
+DEBUG = (ENV == "development")
+
+# Si usas bases de datos o lógica que depende del entorno, ajusta aquí.
+if not DEBUG:
+    print("Running in Production mode")
+    # Lógica para producción, ej: deshabilitar documentación
+    app = FastAPI(docs_url=None, redoc_url=None)
+else:
+    print("Running in Development mode")
+    app = FastAPI()
+
 app.include_router(api.router)
-
-
-app = FastAPI()
 
 # --- Static and Templates Configuration ---
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
